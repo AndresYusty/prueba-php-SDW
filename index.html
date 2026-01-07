@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Select2 para select con búsqueda -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Registro de Usuario</h1>
+        
+        <form id="userForm" method="POST">
+            <!-- Tipo de Documento -->
+            <div class="form-group">
+                <label for="tipo_documento">Tipo de Documento <span class="required">*</span></label>
+                <select id="tipo_documento" name="tipo_documento" required>
+                    <option value="">Seleccione un tipo</option>
+                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="CE">Cédula de Extranjería</option>
+                    <option value="PA">Pasaporte</option>
+                    <option value="TI">Tarjeta de Identidad</option>
+                </select>
+                <span class="error-message" id="error_tipo_documento"></span>
+            </div>
+
+            <!-- Documento -->
+            <div class="form-group">
+                <label for="documento">Número de Documento <span class="required">*</span></label>
+                <input type="text" id="documento" name="documento" required 
+                       placeholder="Ingrese el número de documento"
+                       pattern="[0-9]+" title="Solo números">
+                <span class="error-message" id="error_documento"></span>
+                <span class="info-message" id="info_documento"></span>
+            </div>
+
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre Completo <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ingrese su nombre completo"
+                       pattern="[A-Za-z0-9\s]+" title="Solo letras, números y espacios">
+                <span class="error-message" id="error_nombre"></span>
+            </div>
+
+            <!-- Edad -->
+            <div class="form-group">
+                <label for="edad">Edad <span class="required">*</span></label>
+                <input type="number" id="edad" name="edad" required 
+                       placeholder="Ingrese su edad" min="18" max="120">
+                <span class="error-message" id="error_edad"></span>
+            </div>
+
+            <!-- Género (Select con búsqueda) -->
+            <div class="form-group">
+                <label for="genero">Género <span class="required">*</span></label>
+                <select id="genero" name="genero" class="select2" required>
+                    <option value="">Seleccione un género</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
+                    <option value="PN">Prefiero no decir</option>
+                </select>
+                <span class="error-message" id="error_genero"></span>
+            </div>
+
+            <!-- Multi Select para datos JSON -->
+            <div class="form-group">
+                <label for="preferencias">Preferencias (Múltiple selección) <span class="required">*</span></label>
+                <select id="preferencias" name="preferencias[]" class="select2-multiple" multiple required>
+                    <option value="deportes">Deportes</option>
+                    <option value="musica">Música</option>
+                    <option value="lectura">Lectura</option>
+                    <option value="viajes">Viajes</option>
+                    <option value="tecnologia">Tecnología</option>
+                    <option value="cocina">Cocina</option>
+                    <option value="arte">Arte</option>
+                    <option value="cine">Cine</option>
+                </select>
+                <span class="error-message" id="error_preferencias"></span>
+            </div>
+
+            <!-- Coordenadas -->
+            <div class="form-group">
+                <label>Coordenadas del Dispositivo</label>
+                <div class="coordinates-container">
+                    <input type="text" id="latitud" name="latitud" readonly 
+                           placeholder="Latitud">
+                    <input type="text" id="longitud" name="longitud" readonly 
+                           placeholder="Longitud">
+                </div>
+                <button type="button" id="btnObtenerCoordenadas" class="btn-secondary">
+                    Obtener Coordenadas
+                </button>
+                <span class="error-message" id="error_coordenadas"></span>
+            </div>
+
+            <!-- ID oculto para modificación -->
+            <input type="hidden" id="user_id" name="user_id" value="">
+
+            <!-- Botones -->
+            <div class="form-actions">
+                <button type="submit" id="btnSubmit" class="btn-primary">
+                    <span id="btnText">Registrar Usuario</span>
+                </button>
+                <button type="button" id="btnLimpiar" class="btn-secondary">
+                    Limpiar Formulario
+                </button>
+            </div>
+
+            <!-- Mensaje de respuesta -->
+            <div id="mensajeRespuesta" class="mensaje-respuesta"></div>
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
